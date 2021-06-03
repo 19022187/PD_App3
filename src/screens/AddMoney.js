@@ -16,8 +16,10 @@ const AddMoney = ({route, navigation}) => {
   const [amt, setAmt] = useState('');
   const [desc, setDesc] = useState('');
   const [category, setCat] = useState('');
+  const trxType = route.params.type;
   return (
     <View style={styles.view}>
+      <Text style={styles.title}>{route.params.type}</Text>
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => setAmt(text)}
@@ -51,14 +53,15 @@ const AddMoney = ({route, navigation}) => {
       <View style={styles.btn}>
         <TouchableOpacity
           style={styles.expBtn}
-          onPress={
-            (() => route.params.data.push(route.params.type, category, amt),
+          onPress={() => {
+            route.params.data.push({trxType, category, amt});
+            route.params.data.reload;
             navigation.navigate('View transaction', {
               amt: amt,
               cat: category,
               desc: desc,
-            }))
-          }>
+            });
+          }}>
           <View style={styles.touchable1}>
             <Image source={require('./expense_icon.png')} />
             <Text style={styles.btnText}> Save Expense</Text>
@@ -127,6 +130,12 @@ const styles = StyleSheet.create({
   },
   view: {
     padding: 5,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 17,
+    padding: 10,
+    backgroundColor: '#bb86fc',
   },
 });
 
