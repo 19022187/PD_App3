@@ -16,7 +16,7 @@ const EXP_TYPE = [
       {type: 'Savings', category: 'Savings', amt: 20.0},
       {type: 'Savings', category: 'Savings', amt: 30.0},
     ],
-    total: 0.0,
+    total: 50.0,
   },
   {
     type: 'Expenses',
@@ -25,7 +25,7 @@ const EXP_TYPE = [
       {type: 'Expenses', category: 'Shop', amt: 50.0},
       {type: 'Expenses', category: 'Food', amt: 15.0},
     ],
-    total: 0.0,
+    total: 65.0,
   },
 ];
 
@@ -72,6 +72,10 @@ const HomeScreen = ({navigation}) => {
       <Text style={styles.title}>Home Screen</Text>
       <View style={styles.border} />
       <FlatList data={EXP_TYPE} renderItem={renderItem} />
+      <View style={styles.padding} />
+      <Text style={styles.saves}>
+        Saved: ${EXP_TYPE[0].total - EXP_TYPE[1].total}
+      </Text>
     </View>
   );
 };
@@ -97,6 +101,18 @@ const styles = StyleSheet.create({
   type: {
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  saves: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    padding: 10,
+    marginLeft: 5,
+    marginRight: 295,
+    borderRadius: 5,
+    backgroundColor: '#bb86fc',
+  },
+  padding: {
+    padding: 10,
   },
 });
 

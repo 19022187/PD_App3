@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Image,
+  Button,
 } from 'react-native';
 import Alert from 'react-native/Libraries/Alert/Alert';
 import {Picker} from '@react-native-picker/picker';
@@ -16,7 +17,7 @@ const AddMoney = ({route, navigation}) => {
   const [desc, setDesc] = useState('');
   const [category, setCat] = useState('');
   return (
-    <View>
+    <View style={styles.view}>
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => setAmt(text)}
@@ -50,16 +51,17 @@ const AddMoney = ({route, navigation}) => {
       <View style={styles.btn}>
         <TouchableOpacity
           style={styles.expBtn}
-          onPress={() =>
+          onPress={
+            (() => route.params.data.push(route.params.type, category, amt),
             navigation.navigate('View transaction', {
               amt: amt,
-              desc: desc,
               cat: category,
-            })
+              desc: desc,
+            }))
           }>
           <View style={styles.touchable1}>
             <Image source={require('./expense_icon.png')} />
-            <Text style={styles.btntext}> Save Expense</Text>
+            <Text style={styles.btnText}> Save Expense</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -97,10 +99,11 @@ const styles = StyleSheet.create({
   btn: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: 10,
+    marginTop: 10,
   },
   expBtn: {
-    width: 180,
+    width: 170,
   },
   tipBtn: {
     width: 40,
@@ -119,8 +122,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#bb86fc',
   },
-  btntext: {
+  btnText: {
     fontWeight: 'bold',
+  },
+  view: {
+    padding: 5,
   },
 });
 

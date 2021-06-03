@@ -10,18 +10,20 @@ import {
 
 const ViewTrans = ({route, navigation}) => {
   const renderItem = ({item}) => {
-    return (
-      <View>
-        <View style={styles.info}>
-          <View>
-            <Text style={styles.type}>{route.params.data_type}</Text>
-            <Text>{route.params.data_cat}</Text>
-            <Text>Amount: ${route.params.data_amt}</Text>
+    for (let i of route.params.data) {
+      return (
+        <View>
+          <View style={styles.info}>
+            <View>
+              <Text style={styles.type}>{route.params.data.type}</Text>
+              <Text>{route.params.data.category}</Text>
+              <Text>Amount: ${route.params.data.amt}</Text>
+            </View>
           </View>
+          <View style={styles.border} />
         </View>
-        <View style={styles.border} />
-      </View>
-    );
+      );
+    }
   };
   return (
     <View>
